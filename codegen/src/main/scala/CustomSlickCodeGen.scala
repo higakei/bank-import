@@ -14,8 +14,8 @@ object CustomSlickCodeGen extends App {
   val url         = config.getString(s"$defaultPath.db.url")
   val user        = config.getString(s"$defaultPath.db.user")
   val password    = config.getString(s"$defaultPath.db.password")
-  val outputDir   = "app/"
-  val pkg         = "infrastructures.dto"
+  val outputDir   = "src/main/scala/"
+  val pkg         = "com.bank.infrastructures.db.dto"
 
   val db = Database.forURL(
     url = this.url,
