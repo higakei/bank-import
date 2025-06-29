@@ -11,6 +11,5 @@ CREATE TABLE `bank_master` (
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_bank_master` (`code`),
-  INDEX `idx_bank_master_version` (`version`)
+  UNIQUE KEY `uk_bank_master` (`code`)
 ) COMMENT = '金融機関';
