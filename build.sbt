@@ -1,11 +1,21 @@
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
-//ThisBuild / scalaVersion := "2.13.3"
-
 lazy val root = (project in file("."))
   .settings(
     name := "bank-import"
   )
+
+lazy val codegen = (project in file("codegen"))
+  .settings(
+    libraryDependencies ++= Seq(
+      "com.typesafe.slick" %% "slick-codegen" % "3.3.3",
+      "joda-time" % "joda-time" % "2.10.10",
+      "org.joda" % "joda-convert" % "2.2.1",
+      "com.github.tototoshi" %% "slick-joda-mapper" % "2.5.0",
+      "mysql" % "mysql-connector-java" % "8.0.23",
+      "ch.qos.logback" % "logback-classic" % "1.2.3" % Runtime
+    )
+  ).dependsOn(root)
 
 libraryDependencies ++= Seq(
   ws,
@@ -27,16 +37,6 @@ inThisBuild(
   )
 )
 
-/*scalacOptions ++= List(
-  "-Ywarn-unused",
-  "-Ywarn-dead-code",
-  "-Xfatal-warnings",
-  "-Xlint",
-  "-unchecked",
-  "-deprecation",
-  "-feature"
-)*/
-
 scalacOptions ++= Seq(
   "-deprecation",
   "-feature",
@@ -45,6 +45,7 @@ scalacOptions ++= Seq(
   "-Ywarn-dead-code",
   "-Ywarn-numeric-widen",
   "-Ywarn-unused",
+  "-Wunused",
   "-Wconf:cat=lint-multiarg-infix:silent"
 )
 
@@ -52,6 +53,7 @@ Compile / console / scalacOptions ~= {
   _.filterNot(Set("-Xlint", "-Ywarn-unused"))
 }
 
-Compile / doc /scalacOptions ++= Seq(
+Compile / doc / scalacOptions ++= Seq(
   "-no-link-warnings" // Suppresses problems with Scaladoc @throws links
 )
+
