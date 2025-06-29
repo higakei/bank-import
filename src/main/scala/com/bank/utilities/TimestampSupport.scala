@@ -17,7 +17,7 @@ trait TimestampSupport {
       case s          => s
     }
 
-    val base = pow(10, exponent)
+    val base = pow(10d, exponent.toDouble)
     val nano = (timestamp.getNano.toDouble / base).toInt * base
     timestamp.withNano(nano.toInt)
   }
